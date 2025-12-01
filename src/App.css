@@ -1,0 +1,538 @@
+:root {
+  --primary: #0077ff;
+  --primary-glow: #4da6ff;
+  --secondary: #82c4ff;
+  --bg-dark: #0b0e13;
+  --bg-panel: rgba(15, 20, 30, 0.75);
+  --text-main: #d8e1e9;
+  --text-muted: #cbd5e1;
+  --neon-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary-glow);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+/* Custom Scrollbar for Chrome/Safari/Edge */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05070a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 5px;
+  border: 1px solid rgba(77, 166, 255, 0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+}
+/* Custom Text Selection */
+::selection {
+  background: var(--primary);
+  color: #fff;
+  text-shadow: 0 0 8px #fff;
+}
+body {
+  background-color: var(--bg-dark);
+  /* Added a subtle tech-grid background pattern */
+  background-image: 
+    linear-gradient(135deg, #0b0e13 0%, #1a2634 100%),
+    radial-gradient(#1f2937 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px; /* Grid size */
+  background-blend-mode: overlay;
+  color: var(--text-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.mynav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px; /* Slightly taller */
+  background-color: rgba(10, 15, 25, 0.85);
+  border-bottom: 1px solid rgba(77, 166, 255, 0.1);
+  backdrop-filter: blur(12px); /* Stronger blur */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  position: sticky; /* Keeps nav at top */
+  top: 0;
+  z-index: 1000;
+  transition: 0.5s ease;
+}
+.mynav:hover {
+  background-color: rgba(15, 25, 40, 0.95);
+  box-shadow: 0 0 25px rgba(0, 119, 255, 0.2);
+}
+.mynav a {
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  width: 180px;
+  padding: 12px;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.4s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase; /* More futuristic look */
+}
+/* Glitch/Underline Effect */
+.mynav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: var(--primary-glow);
+  box-shadow: 0 0 10px var(--primary);
+  transform: translateX(-50%);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.mynav a:hover::after {
+  width: 100%;
+}
+.mynav a:hover {
+  color: #fff;
+  text-shadow: 0 0 15px var(--primary-glow);
+  transform: translateY(-2px);
+}
+.main_content {
+  display: flex;
+  flex-wrap: wrap; /* Better mobile handling */
+  justify-content: center;
+  align-items: center;
+  padding: 80px 50px;
+  gap: 50px;
+  min-height: calc(100vh - 70px);
+}
+#info {
+  flex: 1;
+  min-width: 350px;
+  max-width: 650px;
+  position: relative;
+  color: #dce4ef;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 45px;
+  border-radius: 20px;
+  font-size: 22px;
+  text-align: left; /* Easier to read than center */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  animation: infoFloat 6s ease-in-out infinite;
+}
+@keyframes infoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+/* Animated Border Gradient */
+#info::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(45deg, transparent, var(--primary), transparent, #2a11ba);
+  background-size: 400% 400%;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotate 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#info h2 {
+  font-size: 30px;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff, var(--primary-glow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 5px rgba(77, 166, 255, 0.5));
+}
+#info h3 {
+  font-size: 20px;
+  margin: 0 0 25px;
+  color: var(--secondary);
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+#info p {
+  margin-bottom: 40px;
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+/* Button inside Info (Assuming there might be one, or generic button style) */
+.btn-neon {
+    padding: 12px 25px;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary-glow);
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    box-shadow: inset 0 0 10px rgba(0, 119, 255, 0.1);
+}
+.btn-neon:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 20px var(--primary);
+}
+/* Banner Image Wrapper */
+#banner {
+  flex: 0 0 400px;
+  height: 500px; /* Fixed height for consistency */
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: imgfade 1.5s forwards;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  transition: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@keyframes imgfade {
+  from { opacity: 0; transform: scale(0.9) translateX(50px); }
+  to { opacity: 1; transform: scale(1) translateX(0); }
+}
+#banner:hover {
+  transform: scale(1.02) rotate(1deg);
+  box-shadow: 0 0 40px rgba(77, 166, 255, 0.4);
+}
+/* Shine effect on banner */
+#banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+#banner:hover::after {
+  left: 150%;
+  transition: 0.7s ease-in-out;
+}
+/*4. GALLERY / CARDS */
+/* GALLERY */
+.gallery {margin-top: 18px;
+    gap: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* CARD – neon-glass with 3D hover */
+.card {
+    position: relative;
+    border: 1px solid #4aa8ff;
+    border-radius: 14px;
+    width: 350px;
+    background: rgba(0, 10, 25, 0.55);
+    box-shadow: 0 0 25px rgba(3, 44, 249, 0.45), inset 0 0 20px rgba(6, 105, 218, 0.25);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: 0.6s ease;
+}
+/* Subtle 3D tilt on hover */
+.card:hover {
+    transform: scale(1.06) rotateX(3deg) rotateY(-3deg);
+    border-color: #00eaff;
+    box-shadow: 0 0 35px #00eaff, inset 0 0 25px rgba(0, 255, 255, .4);
+}
+/* Animated neon border glow */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 2px;
+    background: linear-gradient(140deg, #4aa8ff, #00eaff, #4aa8ff);
+    background-size: 300%;
+    filter: blur(12px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: neonFlow 5s infinite linear;
+}
+@keyframes neonFlow {
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
+}
+/* IMAGE – smooth fade-in */
+.card img {
+    width: 350px;
+    height: 220px;
+    display: block;
+    border-radius: 14px 14px 0 0;
+    opacity: 0;
+    animation: fadeIn 1.2s forwards ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+}
+/* CONTENT */
+.content {
+    padding: 14px;
+    text-align: center;
+}
+/* TITLE – strong neon glow */
+.title {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #6bc9ff;
+    text-shadow: 0 0 10px #6bc9ff, 0 0 18px #1da9ff;
+}
+/* DESCRIPTION TEXT */
+.description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e7f4ff;
+    opacity: 0.9;
+}
+/* SHINE EFFECT on hover – glossy sweep */
+.card::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(25deg);
+    transition: 0.7s;
+}
+.card:hover::after {
+    top: 100%;
+    left: 100%;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+        max-width: 400px;
+    }
+}
+/* Page Container */
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0a0a0a, #111827);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #e5e7eb;
+}
+/* Page Heading */
+.page-container h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #4da6ff;
+  text-shadow: 0 0 12px rgba(77, 166, 255, 0.7);
+}
+/* Registration Card */
+.page-container .card {
+  width: 380px;
+  background: linear-gradient(145deg, #1f2937, #111827);
+  border-radius: 18px;
+  padding: 25px;
+  border: 1px solid rgba(0, 153, 255, 0.25);
+  box-shadow: 0 0 20px rgba(0, 153, 255, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+/* Label Styling */
+.page-container label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #cbd5e1;
+}
+/* Input Styling */
+.page-container input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(77, 166, 255, 0.35);
+  background: #0e131d;
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+.page-container input:focus {
+  border-color: #4da6ff;
+  box-shadow: 0 0 10px rgba(77, 166, 255, 0.5);
+}
+/* Submit Button */
+.page-container button {
+  padding: 12px 18px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s ease;
+}
+.page-container button:hover {
+  background: #4da6ff;
+  box-shadow: 0 0 18px rgba(77, 166, 255, 0.6);
+  transform: translateY(-3px);
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .page-container .card {
+    width: 95%;
+  }
+}
+/* --- PAGE CONTAINER --- */
+.pagec-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0a0a0a, #111827);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 50px 20px;
+  color: #e5e7eb;
+}
+/* --- HEADING --- */
+.pagec-container h1 {
+  font-size: 34px;
+  margin-bottom: 30px;
+  color: #4da6ff;
+  text-shadow: 0 0 12px rgba(77, 166, 255, 0.8);
+}
+/* --- CONTACT CARD --- */
+.pagec-container .card {
+  width: 420px;
+  background: linear-gradient(145deg, #1f2937, #111827);
+  border-radius: 18px;
+  padding: 25px;
+  border: 1px solid rgba(0, 153, 255, 0.25);
+  box-shadow: 0 0 20px rgba(0, 153, 255, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+/* --- CONTACT DETAILS TEXT --- */
+.pagec-container .card p {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+/* --- SUBHEADING --- */
+.pagec-container .card h3 {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #4da6ff;
+  text-shadow: 0 0 8px rgba(77, 166, 255, 0.6);
+}
+/* --- TEXTAREA --- */
+.pagec-container textarea {
+  background: #0e131d;
+  border: 1px solid rgba(77, 166, 255, 0.35);
+  border-radius: 12px;
+  padding: 12px;
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  transition: 0.3s ease;
+}
+.page-container textarea:focus {
+  border-color: #4da6ff;
+  box-shadow: 0 0 12px rgba(77, 166, 255, 0.55);
+}
+/* --- BUTTON --- */
+.page-container button {
+  padding: 12px 18px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s ease;
+}
+.pagec-container button:hover {
+  background: #4da6ff;
+  box-shadow: 0 0 20px rgba(77, 166, 255, 0.6);
+  transform: translateY(-3px);
+}
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+  .page-container .card {
+    width: 95%;
+  }
+}
+@media (max-width: 900px) {
+  .main_content {
+    flex-direction: column-reverse; /* Puts text on top on mobile if desired, or keep column */
+    padding: 40px 20px;
+  }
+  #banner {
+    width: 100%;
+    height: 300px; /* Smaller image on tablet */
+    flex: none;
+  } 
+  #info {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .mynav {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 10px 0;
+  }
+  .mynav a {
+      width: 100%;
+      font-size: 16px;
+  }
+  
+  #info h2 { font-size: 32px; }
+  
+  .card, .form-card {
+    width: 100%;
+  }
+  
+  .page-container, .pagec-container {
+      padding: 30px 15px;
+  }
+}
